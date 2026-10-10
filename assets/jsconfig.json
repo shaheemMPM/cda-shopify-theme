@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "baseUrl": "./",
+    "moduleResolution": "node",
     "checkJs": true,
     "target": "ES2020",
     "noImplicitAny": true,
@@ -11,5 +12,6 @@
       "@theme/*": ["./*"],
       "@shopify/events": ["./standard-events"]
     }
-  }
+  },
+  "exclude": ["lit-runtime.js"]
 }

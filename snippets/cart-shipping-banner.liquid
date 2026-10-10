@@ -1,6 +1,7 @@
 {% doc %}
-  Renders a hidden, Ajax-powered US$2,000 shipping eligibility demo for the cart drawer.
+  Renders a Lit-powered US$2,000 shipping eligibility demo for the cart drawer.
   Eligibility is determined by cart.js; this does not change shipping rates.
+  Lit projects the Liquid content through a slot only when the cart is eligible.
 
   @example
   {% render 'cart-shipping-banner' %}
@@ -14,29 +15,30 @@
 %}
 
 <cart-shipping-banner-component
-  class="cart-shipping-banner color-custom-cart-shipping-banner"
+  class="color-custom-cart-shipping-banner"
   data-cart-url="{{ routes.cart_url | append: '.js' }}"
-  data-skip-node-update
-  role="status"
-  aria-live="polite"
-  aria-atomic="true"
-  hidden
 >
-  <span class="cart-shipping-banner__icon" aria-hidden="true">
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M3 6h11v11H3zM14 10h4l3 4v3h-7" />
-      <path d="m6 10 2 2 3-3" />
-      <circle cx="7" cy="18" r="2" fill="var(--color-background)" />
-      <circle cx="18" cy="18" r="2" fill="var(--color-background)" />
-    </svg>
-  </span>
-  <div class="cart-shipping-banner__copy">
-    <p class="cart-shipping-banner__heading">{{ 'cart_shipping.eligible' | t }}</p>
-    <p class="cart-shipping-banner__note">{{ 'cart_shipping.demo_note' | t }}</p>
+  <div class="cart-shipping-banner">
+    <span class="cart-shipping-banner__icon" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 6h11v11H3zM14 10h4l3 4v3h-7" />
+        <path d="m6 10 2 2 3-3" />
+        <circle cx="7" cy="18" r="2" fill="var(--color-background)" />
+        <circle cx="18" cy="18" r="2" fill="var(--color-background)" />
+      </svg>
+    </span>
+    <div class="cart-shipping-banner__copy">
+      <p class="cart-shipping-banner__heading">{{ 'cart_shipping.eligible' | t }}</p>
+      <p class="cart-shipping-banner__note">{{ 'cart_shipping.demo_note' | t }}</p>
+    </div>
   </div>
 </cart-shipping-banner-component>
 
 {% stylesheet %}
+  cart-shipping-banner-component:not(:defined) {
+    display: none;
+  }
+
   .cart-shipping-banner {
     display: flex;
     align-items: center;
@@ -45,11 +47,9 @@
     padding: var(--padding-lg);
     border: 1px solid rgb(var(--color-border-rgb) / var(--opacity-15));
     border-radius: var(--style-border-radius-md);
+    color: var(--color-foreground);
+    background-color: var(--color-background);
     text-align: start;
-  }
-
-  .cart-shipping-banner[hidden] {
-    display: none;
   }
 
   .cart-shipping-banner__icon {

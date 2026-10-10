@@ -1,0 +1,22 @@
+{
+  "name": "workroom-theme",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build:vendor": "node scripts/build-vendor.mjs",
+    "check:js": "tsc --project assets/jsconfig.json --noEmit",
+    "test": "node --test tests/cart-shipping-banner.test.mjs"
+  },
+  "dependencies": {
+    "@lit/task": "1.0.3",
+    "lit": "3.3.3"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2",
+    "happy-dom": "20.14.6",
+    "typescript": "5.9.3"
+  }
+}

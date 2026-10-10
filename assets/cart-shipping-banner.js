@@ -1,4 +1,5 @@
-import { Component } from '@theme/component';
+import { LitElement, html, css, nothing } from 'lit';
+import { Task } from '@lit/task';
 import { StandardEvents } from '@shopify/events';
 import { DrawerOpenEvent } from '@theme/theme-drawer';
 import { ThemeEvents } from '@theme/events';
@@ -11,18 +12,51 @@ export class ShippingBannerUpdateEvent extends Event {
   }
 }
 
-class CartShippingBanner extends Component {
+class CartShippingBanner extends LitElement {
+  static properties = {
+    cartUrl: { attribute: 'data-cart-url' },
+    _refreshVersion: { state: true },
+    _pendingUpdates: { state: true },
+  };
+
+  static styles = css`
+    :host, .status { display: contents; }
+  `;
+
+  constructor() {
+    super();
+    this.cartUrl = '';
+    this._refreshVersion = 0;
+    this._pendingUpdates = 0;
+  }
+
+  #cart = new Task(this, {
+    args: () => /** @type {[string, number, number]} */ ([this.cartUrl, this._refreshVersion, this._pendingUpdates]),
+    task: async ([url, , pendingUpdates], { signal }) => {
+      if (!url || pendingUpdates > 0 || !this.isConnected) return false;
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: { Accept: 'application/json' },
+        credentials: 'same-origin',
+        cache: 'no-store',
+        signal,
+      });
+      if (!response.ok) throw new Error(`Cart request failed: ${response.status}`);
+      const cart = await response.json();
+      signal.throwIfAborted();
+
+      // US$2,000 in cents, after discounts. Other presentment currencies are not USD.
+      return cart.currency === 'USD' && Number.isFinite(cart.total_price) && cart.total_price >= 200000;
+    },
+  });
+
   #listeners = new AbortController();
-  /** @type {AbortController | undefined} */
-  #request;
-  #pendingUpdates = 0;
-  #eligible = false;
 
   connectedCallback() {
     super.connectedCallback();
     this.#listeners.abort();
     this.#listeners = new AbortController();
-    this.#pendingUpdates = 0;
+    this._pendingUpdates = 0;
     const { signal } = this.#listeners;
 
     document.addEventListener(StandardEvents.cartLinesUpdate, this.#handleCartUpdate, { signal });
@@ -33,24 +67,20 @@ class CartShippingBanner extends Component {
     this.#refresh();
   }
 
-  updatedCallback() {
-    super.updatedCallback();
-    this.#render();
+  updated() {
+    this.dispatchEvent(new ShippingBannerUpdateEvent());
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     this.#listeners.abort();
-    this.#request?.abort();
+    this.#cart.abort();
   }
 
   /** @param {import('@shopify/events').CartLinesUpdateEvent | import('@shopify/events').CartDiscountUpdateEvent} event */
   #handleCartUpdate = async (event) => {
     const { signal } = this.#listeners;
-    this.#pendingUpdates++;
-    this.#request?.abort();
-    this.#eligible = false;
-    this.#render();
+    this._pendingUpdates++;
 
     try {
       // Cart events fire before the mutation finishes; GET must wait for settlement.
@@ -59,47 +89,24 @@ class CartShippingBanner extends Component {
       // A fresh GET also recovers the actual total after a failed cart mutation.
     } finally {
       if (!signal.aborted) {
-        this.#pendingUpdates--;
-        if (this.#pendingUpdates === 0) this.#refresh();
+        this._pendingUpdates--;
+        this.#refresh();
       }
     }
   };
 
-  #refresh = async () => {
-    if (!this.isConnected || this.#pendingUpdates > 0) return;
-    const cartUrl = this.dataset.cartUrl;
-    if (!cartUrl) return;
-    this.#request?.abort();
-    const request = new AbortController();
-    this.#request = request;
-
-    try {
-      const response = await fetch(cartUrl, {
-        method: 'GET',
-        headers: { Accept: 'application/json' },
-        credentials: 'same-origin',
-        cache: 'no-store',
-        signal: request.signal,
-      });
-      if (!response.ok) throw new Error(`Cart request failed: ${response.status}`);
-      const cart = await response.json();
-      if (request.signal.aborted || !this.isConnected) return;
-
-      // Ajax money values are in subunits: US$2,000 = 200,000 cents, after discounts.
-      // Keep this USD demo from treating another presentment currency as US dollars.
-      this.#eligible = cart.currency === 'USD' && Number.isFinite(cart.total_price) && cart.total_price >= 200000;
-      this.#render();
-    } catch (error) {
-      if (request.signal.aborted || !this.isConnected) return;
-      this.#eligible = false;
-      this.#render();
-      console.warn('[cart-shipping-banner] Unable to check eligibility:', error);
-    }
+  #refresh = () => {
+    this._refreshVersion++;
   };
 
-  #render() {
-    this.hidden = !this.#eligible;
-    this.dispatchEvent(new ShippingBannerUpdateEvent());
+  render() {
+    return html`
+      <div class="status" role="status" aria-live="polite" aria-atomic="true">
+        ${this.#cart.render({
+          complete: (eligible) => eligible ? html`<slot></slot>` : nothing,
+        })}
+      </div>
+    `;
   }
 }
 
