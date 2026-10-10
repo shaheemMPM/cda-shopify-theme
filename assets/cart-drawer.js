@@ -2,6 +2,7 @@ import { Component } from '@theme/component';
 import { StandardEvents } from '@shopify/events';
 import { DrawerOpenEvent } from '@theme/theme-drawer';
 import { ThemeEvents } from '@theme/events';
+import { ShippingBannerUpdateEvent } from '@theme/cart-shipping-banner';
 
 /**
  * A custom element that manages cart drawer behavior within a `<theme-drawer>`.
@@ -34,6 +35,7 @@ class CartDrawerComponent extends Component {
     document.addEventListener(StandardEvents.cartLinesUpdate, this.#handleCartLinesUpdate);
     this.#themeDrawer?.addEventListener(DrawerOpenEvent.eventName, this.#handleDrawerOpen);
     this.addEventListener(ThemeEvents.cartSectionRestored, this.#handleCartSectionRestored);
+    this.addEventListener(ShippingBannerUpdateEvent.eventName, this.#handleShippingBannerUpdate);
     this.addEventListener('click', this.#handleInstallmentsClick, true);
 
     // The restore path sets [open] before this module loads, so the
@@ -49,6 +51,7 @@ class CartDrawerComponent extends Component {
     document.removeEventListener(StandardEvents.cartLinesUpdate, this.#handleCartLinesUpdate);
     this.#themeDrawer?.removeEventListener(DrawerOpenEvent.eventName, this.#handleDrawerOpen);
     this.removeEventListener(ThemeEvents.cartSectionRestored, this.#handleCartSectionRestored);
+    this.removeEventListener(ShippingBannerUpdateEvent.eventName, this.#handleShippingBannerUpdate);
     this.removeEventListener('click', this.#handleInstallmentsClick, true);
   }
 
@@ -67,6 +70,10 @@ class CartDrawerComponent extends Component {
 
   /** Handles the theme-drawer opening by updating its sticky state. */
   #handleDrawerOpen = () => {
+    this.#updateStickyState();
+  };
+
+  #handleShippingBannerUpdate = () => {
     this.#updateStickyState();
   };
 

@@ -8,6 +8,10 @@
  * ------------------------------------------------------------
  */
 {
+  "cart_shipping": {
+    "eligible": "Eligible for free shipping",
+    "demo_note": "Demo only. Shipping is calculated at checkout."
+  },
   "accessibility": {
     "account": "الحساب",
     "active_filters": "عوامل التصفية النشطة:",

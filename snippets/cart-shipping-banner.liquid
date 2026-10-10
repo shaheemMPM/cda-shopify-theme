@@ -1,0 +1,82 @@
+{% doc %}
+  Renders a hidden, Ajax-powered US$2,000 shipping eligibility demo for the cart drawer.
+  Eligibility is determined by cart.js; this does not change shipping rates.
+
+  @example
+  {% render 'cart-shipping-banner' %}
+{% enddoc %}
+
+{% render 'contrast-override',
+  background_color: '#edf3ed',
+  text_color: '#244a35',
+  section_id: 'cart-shipping-banner',
+  preset: 'ui'
+%}
+
+<cart-shipping-banner-component
+  class="cart-shipping-banner color-custom-cart-shipping-banner"
+  data-cart-url="{{ routes.cart_url | append: '.js' }}"
+  data-skip-node-update
+  role="status"
+  aria-live="polite"
+  aria-atomic="true"
+  hidden
+>
+  <span class="cart-shipping-banner__icon" aria-hidden="true">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 6h11v11H3zM14 10h4l3 4v3h-7" />
+      <path d="m6 10 2 2 3-3" />
+      <circle cx="7" cy="18" r="2" fill="var(--color-background)" />
+      <circle cx="18" cy="18" r="2" fill="var(--color-background)" />
+    </svg>
+  </span>
+  <div class="cart-shipping-banner__copy">
+    <p class="cart-shipping-banner__heading">{{ 'cart_shipping.eligible' | t }}</p>
+    <p class="cart-shipping-banner__note">{{ 'cart_shipping.demo_note' | t }}</p>
+  </div>
+</cart-shipping-banner-component>
+
+{% stylesheet %}
+  .cart-shipping-banner {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-md);
+    inline-size: 100%;
+    padding: var(--padding-lg);
+    border: 1px solid rgb(var(--color-border-rgb) / var(--opacity-15));
+    border-radius: var(--style-border-radius-md);
+    text-align: start;
+  }
+
+  .cart-shipping-banner[hidden] {
+    display: none;
+  }
+
+  .cart-shipping-banner__icon {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    inline-size: 2.75rem;
+    block-size: 2.75rem;
+    border: 1px solid rgb(var(--color-border-rgb) / var(--opacity-15));
+    border-radius: var(--style-border-radius-50);
+  }
+
+  .cart-shipping-banner__copy {
+    min-inline-size: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .cart-shipping-banner__heading {
+    margin: 0;
+    font-size: var(--font-size--sm);
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .cart-shipping-banner__note {
+    margin: var(--gap-2xs) 0 0;
+    font-size: var(--font-size--xs);
+    line-height: 1.5;
+  }
+{% endstylesheet %}

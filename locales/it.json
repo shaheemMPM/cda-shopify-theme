@@ -8,6 +8,10 @@
  * ------------------------------------------------------------
  */
 {
+  "cart_shipping": {
+    "eligible": "Eligible for free shipping",
+    "demo_note": "Demo only. Shipping is calculated at checkout."
+  },
   "blocks": {
     "load_video": "Carica il video: {{ description }}",
     "sold_out": "Esaurito",

@@ -22,6 +22,10 @@
     fetchpriority="low"
   ></script>
 
+  {% capture shipping_banner %}
+    {% render 'cart-shipping-banner' %}
+  {% endcapture %}
+
   {% capture empty_cart_drawer_content %}
     <div
       class="cart-drawer__content"
@@ -115,6 +119,7 @@
                 </scroll-hint>
 
                 <div class="cart-drawer__summary">
+                  {{ shipping_banner }}
                   {% render 'cart-summary', section_id: 'cart-drawer-section' %}
                 </div>
               </scroll-hint>
