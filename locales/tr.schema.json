@@ -8,6 +8,10 @@
  * ------------------------------------------------------------
  */
 {
+  "workday": {
+    "section_name": "Çalışma gününü tasarla",
+    "image_info": "Koleksiyon görselini veya ilk ürünün görselini kullanmak için boş bırakın."
+  },
   "names": {
     "404": "404",
     "custom_section": "Özel bölüm",

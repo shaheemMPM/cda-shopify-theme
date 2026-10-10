@@ -1,0 +1,137 @@
+{% comment %}
+  Collection entry points with repeatable cards managed in the theme editor.
+  @example
+  Add Build your workday between the homepage hero and product list.
+{% endcomment %}
+
+{% liquid
+  if section.settings.background_color != blank
+    render 'contrast-override', background_color: section.settings.background_color, section_id: section.id
+  endif
+%}
+
+<div class="section-background color-custom-{{ section.id }}"></div>
+
+<section
+  class="section section--page-width workday-collections color-custom-{{ section.id }}"
+  {% if section.settings.heading != blank %}
+    aria-labelledby="WorkdayHeading-{{ section.id }}"
+  {% endif %}
+>
+  {% if section.settings.heading != blank or section.settings.subheading != blank %}
+    <div class="workday-collections__intro">
+      {% if section.settings.heading != blank %}
+        <h2 id="WorkdayHeading-{{ section.id }}" class="workday-collections__heading h2">
+          {{ section.settings.heading | escape }}
+        </h2>
+      {% endif %}
+      {% if section.settings.subheading != blank %}
+        <p class="workday-collections__subheading">{{ section.settings.subheading | escape }}</p>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <div class="workday-collections__grid">
+    {% content_for 'blocks' %}
+  </div>
+</section>
+
+{% stylesheet %}
+  .workday-collections {
+    padding-block: clamp(var(--padding-5xl), 6vw, calc(var(--padding-6xl) * 1.5));
+    row-gap: var(--gap-3xl);
+  }
+
+  .workday-collections__intro {
+    display: grid;
+    gap: var(--gap-lg);
+    max-width: 52rem;
+    min-width: 0;
+  }
+
+  .workday-collections__heading,
+  .workday-collections__subheading {
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .workday-collections__subheading {
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-80));
+    max-width: 44rem;
+  }
+
+  .workday-collections__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--gap-2xl);
+    min-width: 0;
+  }
+
+  @media screen and (max-width: 749px) {
+    .workday-collections__grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--gap-3xl);
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:workday.section_name",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "max_blocks": 3,
+  "blocks": [{ "type": "_workday-collection-card" }],
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:settings.heading",
+      "default": "Build your workday, your way"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "t:names.subheading",
+      "default": "From your first desk to the finishing touches, make room for better work."
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "default": "#f7f4ed"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:workday.section_name",
+      "category": "t:categories.collections",
+      "blocks": [
+        {
+          "type": "_workday-collection-card",
+          "settings": {
+            "heading": "Your desk. Your foundation.",
+            "description": "Find a place for focused work, with room to sit or stand.",
+            "link_label": "Explore desks"
+          }
+        },
+        {
+          "type": "_workday-collection-card",
+          "settings": {
+            "heading": "Settle into your workday.",
+            "description": "Find the chair that fits your workspace and style.",
+            "link_label": "Explore chairs"
+          }
+        },
+        {
+          "type": "_workday-collection-card",
+          "settings": {
+            "heading": "Small details. Better days.",
+            "description": "Lighting, storage and everyday essentials to complete your setup.",
+            "link_label": "Explore accessories"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

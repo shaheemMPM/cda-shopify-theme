@@ -8,6 +8,10 @@
  * ------------------------------------------------------------
  */
 {
+  "workday": {
+    "section_name": "Build your workday",
+    "image_info": "Leave empty to use the collection image or its first product image."
+  },
   "categories": {
     "banners": "Banners",
     // Category for fundamental content blocks (text, images, buttons)

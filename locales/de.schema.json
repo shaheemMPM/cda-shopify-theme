@@ -8,6 +8,10 @@
  * ------------------------------------------------------------
  */
 {
+  "workday": {
+    "section_name": "Gestalte deinen Arbeitstag",
+    "image_info": "Ohne Auswahl wird das Kollektionsbild oder das Bild des ersten Produkts verwendet."
+  },
   "names": {
     "404": "404",
     "custom_section": "Benutzerdefinierter Abschnitt",

@@ -8,6 +8,10 @@
  * ------------------------------------------------------------
  */
 {
+  "workday": {
+    "section_name": "Twój dzień pracy",
+    "image_info": "Pozostaw puste, aby użyć obrazu kolekcji lub jej pierwszego produktu."
+  },
   "names": {
     "404": "404",
     "custom_section": "Sekcja niestandardowa",

@@ -8,6 +8,10 @@
  * ------------------------------------------------------------
  */
 {
+  "workday": {
+    "section_name": "Crie o seu dia de trabalho",
+    "image_info": "Deixe em branco para utilizar a imagem da coleção ou do primeiro produto."
+  },
   "names": {
     "404": "404",
     "colors": "Paleta de cores",

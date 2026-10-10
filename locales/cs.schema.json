@@ -8,6 +8,10 @@
  * ------------------------------------------------------------
  */
 {
+  "workday": {
+    "section_name": "Váš pracovní den",
+    "image_info": "Pokud obrázek nevyberete, použije se obrázek kolekce nebo jejího prvního produktu."
+  },
   "names": {
     "404": "404",
     "colors": "Paleta barev",

@@ -8,6 +8,10 @@
  * ------------------------------------------------------------
  */
 {
+  "workday": {
+    "section_name": "Créez votre journée",
+    "image_info": "Laissez ce champ vide pour utiliser l’image de la collection ou de son premier produit."
+  },
   "names": {
     "404": "404",
     "custom_section": "Section personnalisée",

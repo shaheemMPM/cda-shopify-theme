@@ -8,6 +8,44 @@
  * ------------------------------------------------------------
  */{
   "sections": {
+    "workday_collections": {
+      "type": "workday-collections",
+      "blocks": {
+        "desks": {
+          "type": "_workday-collection-card",
+          "settings": {
+            "heading": "Your desk. Your foundation.",
+            "description": "Find a place for focused work, with room to sit or stand.",
+            "collection": "workroom-desks",
+            "link_label": "Explore desks"
+          }
+        },
+        "chairs": {
+          "type": "_workday-collection-card",
+          "settings": {
+            "heading": "Settle into your workday.",
+            "description": "Find the chair that fits your workspace and style.",
+            "collection": "workroom-chairs",
+            "link_label": "Explore chairs"
+          }
+        },
+        "accessories": {
+          "type": "_workday-collection-card",
+          "settings": {
+            "heading": "Small details. Better days.",
+            "description": "Lighting, storage and everyday essentials to complete your setup.",
+            "collection": "workroom-desk-accessories",
+            "link_label": "Explore accessories"
+          }
+        }
+      },
+      "block_order": ["desks", "chairs", "accessories"],
+      "settings": {
+        "heading": "Build your workday, your way",
+        "subheading": "From your first desk to the finishing touches, make room for better work.",
+        "background_color": "#f7f4ed"
+      }
+    },
     "hero_jVaWmY": {
       "type": "hero",
       "blocks": {
@@ -280,6 +318,7 @@
   },
   "order": [
     "hero_jVaWmY",
+    "workday_collections",
     "product_list_fa6P9H"
   ]
 }

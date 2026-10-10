@@ -8,6 +8,10 @@
  * ------------------------------------------------------------
  */
 {
+  "workday": {
+    "section_name": "Crea la tua giornata",
+    "image_info": "Lascia vuoto per usare l’immagine della collezione o del suo primo prodotto."
+  },
   "names": {
     "404": "404",
     "colors": "Palette colori",

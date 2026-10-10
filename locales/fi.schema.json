@@ -8,6 +8,10 @@
  * ------------------------------------------------------------
  */
 {
+  "workday": {
+    "section_name": "Rakenna työpäiväsi",
+    "image_info": "Jätä tyhjäksi, jos haluat käyttää kokoelman kuvaa tai sen ensimmäisen tuotteen kuvaa."
+  },
   "names": {
     "404": "404",
     "colors": "Väripaletti",

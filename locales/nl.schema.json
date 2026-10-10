@@ -8,6 +8,10 @@
  * ------------------------------------------------------------
  */
 {
+  "workday": {
+    "section_name": "Jouw ideale werkdag",
+    "image_info": "Laat leeg om de collectieafbeelding of de afbeelding van het eerste product te gebruiken."
+  },
   "names": {
     "404": "404",
     "custom_section": "Aangepaste sectie",

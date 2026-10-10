@@ -8,6 +8,10 @@
  * ------------------------------------------------------------
  */
 {
+  "workday": {
+    "section_name": "Skapa din arbetsdag",
+    "image_info": "Lämna tomt för att använda kollektionens bild eller bilden av dess första produkt."
+  },
   "names": {
     "404": "404",
     "colors": "Färgpalett",
