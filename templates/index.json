@@ -39,7 +39,11 @@
           }
         }
       },
-      "block_order": ["desks", "chairs", "accessories"],
+      "block_order": [
+        "desks",
+        "chairs",
+        "accessories"
+      ],
       "settings": {
         "heading": "Build your workday, your way",
         "subheading": "From your first desk to the finishing touches, make room for better work.",
@@ -314,11 +318,20 @@
         "padding-block-start": 48,
         "padding-block-end": 48
       }
+    },
+    "workspace_guides": {
+      "type": "workspace-guides",
+      "settings": {
+        "heading": "Make room for a better workday.",
+        "subheading": "Simple ideas for a space that works for you.",
+        "background_color": "#f7f4ed"
+      }
     }
   },
   "order": [
     "hero_jVaWmY",
     "workday_collections",
-    "product_list_fa6P9H"
+    "product_list_fa6P9H",
+    "workspace_guides"
   ]
 }

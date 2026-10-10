@@ -1,0 +1,17 @@
+{
+  "sections": {
+    "main": {
+      "type": "workspace-guide",
+      "settings": { "background_color": "#f7f4ed" }
+    },
+    "more_guides": {
+      "type": "workspace-guides",
+      "settings": {
+        "heading": "Keep making room for better work.",
+        "subheading": "A little inspiration for the rest of your setup.",
+        "background_color": "{{ settings.color_palette.background }}"
+      }
+    }
+  },
+  "order": ["main", "more_guides"]
+}

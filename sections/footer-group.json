@@ -128,11 +128,18 @@
             "padding-inline-end": 0
           },
           "blocks": {}
+        },
+        "workspace_guide_links": {
+          "type": "workspace-guide-links",
+          "settings": {
+            "heading": "Workspace guides"
+          }
         }
       },
       "block_order": [
         "group_H6VpwJ",
-        "email_signup_crihX7"
+        "email_signup_crihX7",
+        "workspace_guide_links"
       ],
       "name": "t:names.footer",
       "settings": {

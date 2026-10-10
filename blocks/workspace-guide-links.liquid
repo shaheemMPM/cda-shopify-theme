@@ -1,0 +1,65 @@
+{% doc %}
+  Links to up to 12 active Workspace guide metaobject pages. Entry titles and URLs
+  are shared with the homepage cards and individual guide pages.
+  @example
+  Add Workspace guide links to the footer.
+{% enddoc %}
+
+{% capture guide_links %}
+  {% for guide in metaobjects.workroom_guide.values limit: 12 %}
+    {% if guide.system.url != blank %}
+      <li><a href="{{ guide.system.url }}">{{ guide.title.value | escape }}</a></li>
+    {% endif %}
+  {% endfor %}
+{% endcapture %}
+{% assign guide_links = guide_links | strip %}
+{% assign default_heading = 'workspace_guides.name' | t %}
+
+{% if guide_links != blank or request.design_mode %}
+  <nav class="workspace-guide-links" aria-label="{{ block.settings.heading | default: default_heading | escape }}" {{ block.shopify_attributes }}>
+    {% if block.settings.heading != blank %}
+      <h2 class="workspace-guide-links__heading h4">{{ block.settings.heading | escape }}</h2>
+    {% endif %}
+    {% if guide_links != blank %}
+      <ul class="workspace-guide-links__list list-unstyled">{{ guide_links }}</ul>
+    {% else %}
+      <p>{{ 'workspace_guides.empty_editor' | t }}</p>
+    {% endif %}
+  </nav>
+{% endif %}
+
+{% stylesheet %}
+  .workspace-guide-links {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .workspace-guide-links__heading {
+    margin-block: 0 var(--margin-md);
+  }
+
+  .workspace-guide-links__list {
+    display: grid;
+    gap: var(--gap-2xs);
+    margin: 0;
+  }
+
+  .workspace-guide-links__list a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--minimum-touch-target);
+    color: inherit;
+    text-underline-offset: 0.25em;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:workspace_guides.links_name",
+  "tag": null,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "t:settings.heading", "default": "t:workspace_guides.name" }
+  ],
+  "presets": [{ "name": "t:workspace_guides.links_name", "category": "t:categories.footer" }]
+}
+{% endschema %}

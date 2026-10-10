@@ -1,0 +1,24 @@
+# Run operations separately with write_metaobject_definitions / write_metaobjects.
+# 1. Create the merchant-owned definition from workspace-guides.json.
+mutation CreateWorkspaceGuideDefinition($definition: MetaobjectDefinitionCreateInput!) {
+  metaobjectDefinitionCreate(definition: $definition) {
+    metaobjectDefinition { id type }
+    userErrors { field message code }
+  }
+}
+
+# 2. Upsert entries by type + handle. Serialize rich text as JSON and resolve
+# collection handles to collection IDs before supplying the fields array.
+mutation SaveWorkspaceGuide($handle: MetaobjectHandleInput!, $metaobject: MetaobjectUpsertInput!) {
+  metaobjectUpsert(handle: $handle, metaobject: $metaobject) {
+    metaobject { id handle }
+    userErrors { field message code }
+  }
+}
+
+# 3. Read entries. Liquid uses metaobjects.workroom_guide.values and metaobject.
+query WorkspaceGuides {
+  metaobjects(type: "workroom_guide", first: 50) {
+    nodes { handle values capabilities { publishable { status } } }
+  }
+}

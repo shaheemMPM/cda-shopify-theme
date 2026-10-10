@@ -8,6 +8,16 @@
  * ------------------------------------------------------------
  */
 {
+  "workspace_guides": {
+    "name": "Workspace guides",
+    "eyebrow": "The Workroom guide",
+    "read_guide": "Read the guide",
+    "back_home": "Back to home",
+    "shop_heading": "Make it your own.",
+    "shop_description": "Find the pieces that fit your space and your everyday routine.",
+    "explore_collection": "Explore {{ collection }}",
+    "empty_editor": "Create active Workspace guide entries in Content > Metaobjects and enable their web pages to show guides here."
+  },
   "product_dimensions": {
     "label": "Dimensions",
     "height": "Height",

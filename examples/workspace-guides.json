@@ -1,0 +1,265 @@
+{
+  "purpose": "Merchant-owned workshop guides. Resolve collection handles to IDs and serialize body JSON before upserting.",
+  "definition": {
+    "name": "Workspace guide",
+    "type": "workroom_guide",
+    "description": "Practical workspace guides, shared by the homepage, footer and individual guide pages.",
+    "displayNameKey": "title",
+    "access": {
+      "storefront": "PUBLIC_READ"
+    },
+    "capabilities": {
+      "publishable": {
+        "enabled": true
+      },
+      "onlineStore": {
+        "enabled": true,
+        "data": {
+          "urlHandle": "workspace-guides"
+        }
+      },
+      "renderable": {
+        "enabled": true,
+        "data": {
+          "metaTitleKey": "title",
+          "metaDescriptionKey": "summary"
+        }
+      }
+    },
+    "fieldDefinitions": [
+      {
+        "key": "title",
+        "name": "Title",
+        "type": "single_line_text_field",
+        "required": true
+      },
+      {
+        "key": "summary",
+        "name": "Summary",
+        "type": "multi_line_text_field",
+        "required": true
+      },
+      {
+        "key": "body",
+        "name": "Body",
+        "type": "rich_text_field",
+        "required": true
+      },
+      {
+        "key": "collection",
+        "name": "Collection",
+        "type": "collection_reference",
+        "required": false
+      }
+    ]
+  },
+  "entries": [
+    {
+      "handle": "plan-your-workspace",
+      "title": "A little planning. A better workspace.",
+      "summary": "Start with your room, your routine and the things you reach for every day.",
+      "body": {
+        "type": "root",
+        "children": [
+          {
+            "type": "heading",
+            "level": 2,
+            "children": [
+              {
+                "type": "text",
+                "value": "Start with the space you have"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "children": [
+              {
+                "type": "text",
+                "value": "Measure the spot where your desk will live. Note doors, sockets and nearby storage, then leave room to move your chair and walk around the desk."
+              }
+            ]
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "children": [
+              {
+                "type": "text",
+                "value": "Make room for your everyday work"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "children": [
+              {
+                "type": "text",
+                "value": "List what needs to stay on the surface: a laptop, a monitor, a notebook or a lamp. Lay those items out before choosing a desk size, and decide what can live in a drawer or on a shelf."
+              }
+            ]
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "children": [
+              {
+                "type": "text",
+                "value": "Check the fit before you choose"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "children": [
+              {
+                "type": "text",
+                "value": "Compare the desk’s height, width and length with your plan. For an adjustable desk, check the manufacturer’s full height range and cable requirements. The product dimensions in this workshop are sample values, so use verified specifications for a real purchase."
+              }
+            ]
+          }
+        ]
+      },
+      "collection_handle": "workroom-desks",
+      "status": "ACTIVE"
+    },
+    {
+      "handle": "choose-your-chair",
+      "title": "Make room for your kind of workday.",
+      "summary": "Choose a chair around your desk, your space and the way you like to work.",
+      "body": {
+        "type": "root",
+        "children": [
+          {
+            "type": "heading",
+            "level": 2,
+            "children": [
+              {
+                "type": "text",
+                "value": "Think about your routine"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "children": [
+              {
+                "type": "text",
+                "value": "A shared table, a dedicated office and a compact work corner all ask different things of a chair. Start with how you use the space and how often you need to move the chair out of the way."
+              }
+            ]
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "children": [
+              {
+                "type": "text",
+                "value": "Look beyond the seat"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "children": [
+              {
+                "type": "text",
+                "value": "Check the chair’s overall width, height and length. Allow space for the base and armrests, and check whether it can tuck beneath your desk. Follow the manufacturer’s adjustment and assembly instructions."
+              }
+            ]
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "children": [
+              {
+                "type": "text",
+                "value": "Bring the room together"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "children": [
+              {
+                "type": "text",
+                "value": "Compare finishes with the furniture you already own. Mesh, upholstered and leather-look designs each bring a different feel; choose a finish you enjoy and check its care instructions before buying."
+              }
+            ]
+          }
+        ]
+      },
+      "collection_handle": "workroom-chairs",
+      "status": "ACTIVE"
+    },
+    {
+      "handle": "finish-your-setup",
+      "title": "Small additions. A calmer desk.",
+      "summary": "Give lighting, storage and everyday essentials a place in your setup.",
+      "body": {
+        "type": "root",
+        "children": [
+          {
+            "type": "heading",
+            "level": 2,
+            "children": [
+              {
+                "type": "text",
+                "value": "Keep the essentials close"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "children": [
+              {
+                "type": "text",
+                "value": "Pick the items you use most and give them an easy-to-reach home. A small tray for papers and a place for pens can help keep the working surface clear."
+              }
+            ]
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "children": [
+              {
+                "type": "text",
+                "value": "Plan your lighting and cables"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "children": [
+              {
+                "type": "text",
+                "value": "Position a lamp where it lights your work without reflecting in your screen. Check where cables will run and leave enough slack for any moving furniture. Follow the instructions supplied with electrical accessories."
+              }
+            ]
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "children": [
+              {
+                "type": "text",
+                "value": "Leave a little breathing room"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "children": [
+              {
+                "type": "text",
+                "value": "Add only what supports your routine. Keep a clear area for the task in front of you, and make a quick reset of the surface part of finishing your day."
+              }
+            ]
+          }
+        ]
+      },
+      "collection_handle": "workroom-desk-accessories",
+      "status": "ACTIVE"
+    }
+  ]
+}

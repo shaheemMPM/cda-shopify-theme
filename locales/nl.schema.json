@@ -8,6 +8,15 @@
  * ------------------------------------------------------------
  */
 {
+  "workspace_guides": {
+    "name": "Workspace guides",
+    "heading": "Make room for a better workday.",
+    "subheading": "Simple ideas for a space that works for you.",
+    "info": "Displays up to 12 active workroom_guide entries with web pages enabled. Edit their titles and content in Content > Metaobjects > Workspace guide.",
+    "page_name": "Workspace guide page",
+    "page_info": "Content comes from the current Workspace guide metaobject. Its collection supplies the image and shopping link.",
+    "links_name": "Workspace guide links"
+  },
   "product_dimensions": {
     "name": "Product dimensions",
     "info": "Uses the product metafields custom.height, custom.width and custom.length (Dimension type). Empty measurements are hidden.",

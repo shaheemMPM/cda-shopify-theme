@@ -1,0 +1,159 @@
+{% comment %}
+  Renders the title, summary, rich-text body and collection of a Workspace guide.
+  @example
+  Used by templates/metaobject/workroom_guide.json for every active guide entry.
+{% endcomment %}
+
+{% liquid
+  assign guide_collection = metaobject.collection.value
+  assign guide_image = guide_collection.featured_image
+%}
+{% render 'contrast-override', background_color: section.settings.background_color, section_id: section.id %}
+<div class="section-background color-custom-{{ section.id }}"></div>
+<article class="section section--page-width workspace-guide color-custom-{{ section.id }}" style="--guide-radius: {{ settings.card_corner_radius }}px;">
+  <header class="workspace-guide__header{% if guide_image == blank %} workspace-guide__header--text-only{% endif %}">
+    <div class="workspace-guide__intro">
+      <a class="workspace-guide__back" href="{{ routes.root_url }}">{{ 'workspace_guides.back_home' | t }}</a>
+      <p class="workspace-guide__eyebrow">{{ 'workspace_guides.eyebrow' | t }}</p>
+      <h1 class="workspace-guide__title h1">{{ metaobject.title.value | escape }}</h1>
+      {% if metaobject.summary.value != blank %}
+        <p class="workspace-guide__summary">{{ metaobject.summary.value | escape }}</p>
+      {% endif %}
+    </div>
+    {% if guide_image != blank %}
+      <div class="workspace-guide__media">
+        {{ guide_image | image_url: width: 1440 | image_tag: widths: '360, 540, 720, 1080, 1440', sizes: '(min-width: 750px) 40vw, calc(100vw - 32px)', loading: 'eager', class: 'workspace-guide__image', alt: '' }}
+      </div>
+    {% endif %}
+  </header>
+  <div class="workspace-guide__content">
+    {% if metaobject.body.value != blank %}
+      <div class="workspace-guide__body rte">{{ metaobject.body | metafield_tag }}</div>
+    {% endif %}
+    {% if guide_collection != blank %}
+      <aside class="workspace-guide__shop">
+        <h2 class="h4">{{ 'workspace_guides.shop_heading' | t }}</h2>
+        <p>{{ 'workspace_guides.shop_description' | t }}</p>
+        <a class="button" href="{{ guide_collection.url }}">{{ 'workspace_guides.explore_collection' | t: collection: guide_collection.title | escape }}</a>
+      </aside>
+    {% endif %}
+  </div>
+</article>
+
+{% stylesheet %}
+  .workspace-guide {
+    padding-block: var(--padding-4xl) var(--padding-6xl);
+    overflow-wrap: anywhere;
+  }
+
+  .workspace-guide__header {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(var(--gap-2xl), 6vw, 7rem);
+  }
+
+  .workspace-guide__header--text-only {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 60rem;
+  }
+
+  .workspace-guide__back {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--minimum-touch-target);
+    margin-block-end: var(--gap-3xl);
+    color: inherit;
+    text-underline-offset: 0.25em;
+  }
+
+  .workspace-guide__eyebrow {
+    margin-block: 0 var(--margin-lg);
+    font-size: var(--font-size--xs);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  .workspace-guide__title {
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  .workspace-guide__summary {
+    max-width: 38rem;
+    margin-block: var(--margin-2xl) 0;
+    color: var(--color-foreground-muted);
+    font-size: var(--font-h4--size);
+  }
+
+  .workspace-guide__media {
+    aspect-ratio: 1;
+    overflow: hidden;
+    background: var(--palette-lightest);
+    border-radius: var(--guide-radius);
+  }
+
+  .workspace-guide__image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .workspace-guide__content {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    gap: clamp(var(--gap-2xl), 6vw, 7rem);
+    align-items: start;
+    margin-block-start: clamp(var(--gap-3xl), 6vw, 7rem);
+    padding-block-start: var(--padding-3xl);
+    border-block-start: 1px solid rgb(var(--color-foreground-rgb) / var(--opacity-20));
+  }
+
+  .workspace-guide__body {
+    max-width: 46rem;
+    line-height: 1.7;
+  }
+
+  .workspace-guide__body h2 {
+    margin-block: var(--gap-3xl) var(--margin-lg);
+    font-size: var(--font-h3--size);
+  }
+
+  .workspace-guide__body h2:first-child,
+  .workspace-guide__shop h2 {
+    margin-block-start: 0;
+  }
+
+  .workspace-guide__shop {
+    padding: var(--padding-2xl);
+    border: 1px solid rgb(var(--color-foreground-rgb) / var(--opacity-20));
+    border-radius: var(--guide-radius);
+  }
+
+  .workspace-guide__shop .button {
+    width: 100%;
+    white-space: normal;
+    text-align: center;
+  }
+
+  @media screen and (max-width: 749px) {
+    .workspace-guide__header,
+    .workspace-guide__content {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .workspace-guide__title {
+      font-size: var(--font-h2--size);
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:workspace_guides.page_name",
+  "settings": [
+    { "type": "paragraph", "content": "t:workspace_guides.page_info" },
+    { "type": "color", "id": "background_color", "label": "t:settings.background_color", "default": "#f7f4ed" }
+  ]
+}
+{% endschema %}
