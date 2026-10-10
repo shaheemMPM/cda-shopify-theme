@@ -1,0 +1,140 @@
+{
+  "purpose": "Illustrative workshop measurements only; not manufacturer specifications. Never overwrite existing merchant measurements when seeding.",
+  "unit": "cm",
+  "definitions": [
+    {
+      "name": "Height",
+      "namespace": "custom",
+      "key": "height",
+      "type": "dimension",
+      "ownerType": "PRODUCT",
+      "description": "Workshop sample height in the assembled position. Replace with verified measurements before retail use.",
+      "pin": true,
+      "access": {
+        "storefront": "PUBLIC_READ"
+      }
+    },
+    {
+      "name": "Width",
+      "namespace": "custom",
+      "key": "width",
+      "type": "dimension",
+      "ownerType": "PRODUCT",
+      "description": "Workshop sample width in the assembled position. Replace with verified measurements before retail use.",
+      "pin": true,
+      "access": {
+        "storefront": "PUBLIC_READ"
+      }
+    },
+    {
+      "name": "Length",
+      "namespace": "custom",
+      "key": "length",
+      "type": "dimension",
+      "ownerType": "PRODUCT",
+      "description": "Workshop sample length in the assembled position. Replace with verified measurements before retail use.",
+      "pin": true,
+      "access": {
+        "storefront": "PUBLIC_READ"
+      }
+    }
+  ],
+  "products": [
+    {
+      "handle": "workroom-motionwise-electric-height-adjustable-desk-home-office-style-24-x-48-snow-white",
+      "height": 75,
+      "width": 120,
+      "length": 60
+    },
+    {
+      "handle": "workroom-star-quality-rise-electric-height-adjustable-desk-grey-dusk-st-sr-2448-kit",
+      "height": 72,
+      "width": 120,
+      "length": 60
+    },
+    {
+      "handle": "workroom-dorel-parsons-desk-with-drawer-black",
+      "height": 76,
+      "width": 100,
+      "length": 50
+    },
+    {
+      "handle": "workroom-monarch-i-7138-computer-desk-dark-taupe-corner-with-tempered-glass",
+      "height": 76,
+      "width": 150,
+      "length": 120
+    },
+    {
+      "handle": "workroom-staples-hyken-technical-mesh-task-chair-black",
+      "height": 115,
+      "width": 65,
+      "length": 65
+    },
+    {
+      "handle": "workroom-staples-bentura-black-bonded-leather-managers-chair",
+      "height": 110,
+      "width": 68,
+      "length": 68
+    },
+    {
+      "handle": "workroom-serta-high-back-managers-chair-black",
+      "height": 118,
+      "width": 70,
+      "length": 70
+    },
+    {
+      "handle": "workroom-staples-westcliffe-bonded-leather-managers-chair-brown",
+      "height": 112,
+      "width": 68,
+      "length": 68
+    },
+    {
+      "handle": "workroom-tensor-led-double-reach-arm-desk-lamp-18-11-h-black-chrome-18175-001",
+      "height": 46,
+      "width": 18,
+      "length": 35
+    },
+    {
+      "handle": "workroom-mesh-wire-desk-set-combo-5-piece-set",
+      "height": 12,
+      "width": 30,
+      "length": 20
+    },
+    {
+      "handle": "workroom-greenside-ellypse-letter-tray-single-clear",
+      "height": 7,
+      "width": 26,
+      "length": 35
+    },
+    {
+      "handle": "workroom-logitech-mk320-wireless-desktop-keyboard-and-mouse-combo-english",
+      "height": 3,
+      "width": 45,
+      "length": 18
+    },
+    {
+      "handle": "workroom-logitech-m170-wireless-mouse-black",
+      "height": 4,
+      "width": 6,
+      "length": 10
+    },
+    {
+      "handle": "workroom-marathon-digital-desktop-clock-with-day-date-temperature-alarm-and-backlight-black-cl030050bk",
+      "height": 9,
+      "width": 14,
+      "length": 5
+    },
+    {
+      "handle": "workroom-ergotron-workfit-tl-sit-stand-desktop-workstation",
+      "height": 15,
+      "width": 95,
+      "length": 60
+    },
+    {
+      "handle": "workroom-flash-furniture-portable-computer-stand-black",
+      "height": 70,
+      "width": 55,
+      "length": 40
+    }
+  ]
+}

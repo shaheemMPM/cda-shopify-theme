@@ -8,6 +8,13 @@
  * ------------------------------------------------------------
  */
 {
+  "product_dimensions": {
+    "label": "Dimensions",
+    "height": "Height",
+    "width": "Width",
+    "length": "Length",
+    "empty_editor": "Add height, width or length in this product’s metafields to show its measurements."
+  },
   "cart_shipping": {
     "eligible": "Eligible for free shipping",
     "demo_note": "Demo only. Shipping is calculated at checkout."

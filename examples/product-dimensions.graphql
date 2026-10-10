@@ -1,0 +1,26 @@
+# Run these operations separately with the Admin API (write_products scope).
+# 1. Create each merchant-owned definition from product-dimensions.json.
+mutation CreateProductDimension($definition: MetafieldDefinitionInput!) {
+  metafieldDefinitionCreate(definition: $definition) {
+    createdDefinition { id namespace key }
+    userErrors { field message code }
+  }
+}
+
+# 2. Resolve product handles to IDs, then set values in batches of at most 25.
+# A dimension value is a JSON string, e.g. {"value":75,"unit":"cm"}.
+mutation SetProductDimensions($metafields: [MetafieldsSetInput!]!) {
+  metafieldsSet(metafields: $metafields) {
+    metafields { namespace key jsonValue }
+    userErrors { field message code }
+  }
+}
+
+# 3. Read the saved measurements. Liquid reads the same custom.* keys.
+query ProductDimensions($id: ID!) {
+  product(id: $id) {
+    height: metafield(namespace: "custom", key: "height") { jsonValue }
+    width: metafield(namespace: "custom", key: "width") { jsonValue }
+    length: metafield(namespace: "custom", key: "length") { jsonValue }
+  }
+}

@@ -298,6 +298,14 @@
                 "padding-inline-end": 0
               },
               "blocks": {}
+            },
+            "product_dimensions": {
+              "type": "product-dimensions",
+              "settings": {
+                "heading": "Made to fit your space",
+                "note": "Workshop sample measurements, not verified product specifications.",
+                "background_color": "#f7f4ed"
+              }
             }
           },
           "block_order": [
@@ -305,6 +313,7 @@
             "divider_VJhene",
             "variant_picker_R3rGDr",
             "buy_buttons_eYQEYi",
+            "product_dimensions",
             "text_aEtTtq"
           ]
         }

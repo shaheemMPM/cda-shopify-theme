@@ -1,0 +1,135 @@
+{% doc %}
+  Displays the current product's custom.height, custom.width and custom.length
+  dimension metafields. Missing measurements are omitted; an empty product hides the block.
+  @example
+  Add Product dimensions inside Product information > Details in the theme editor.
+{% enddoc %}
+
+{% liquid
+  assign dimension_product = closest.product
+  assign dimension_keys = 'height,width,length' | split: ','
+  assign has_dimensions = false
+  for key in dimension_keys
+    if dimension_product.metafields.custom[key].value != blank
+      assign has_dimensions = true
+    endif
+  endfor
+  assign color_id = 'dimensions-' | append: section.id | append: '-' | append: block.id
+%}
+
+{% if has_dimensions or request.design_mode %}
+  {% render 'contrast-override', background_color: block.settings.background_color, section_id: color_id %}
+  <div
+    class="product-dimensions color-custom-{{ color_id }}"
+    style="--dimensions-radius: {{ settings.card_corner_radius }}px;"
+    {{ block.shopify_attributes }}
+  >
+    <div class="product-dimensions__intro">
+      <svg class="product-dimensions__icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <rect x="4" y="9" width="24" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M9 9v7m5-7v4m5-4v7m5-7v4" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <div>
+        <p class="product-dimensions__eyebrow">{{ 'product_dimensions.label' | t }}</p>
+        {% if block.settings.heading != blank %}
+          <h2 class="product-dimensions__heading h5">{{ block.settings.heading | escape }}</h2>
+        {% endif %}
+      </div>
+    </div>
+    {% if has_dimensions %}
+      <dl class="product-dimensions__list">
+        {% for key in dimension_keys %}
+          {% assign measurement = dimension_product.metafields.custom[key] %}
+          {% if measurement.value != blank %}
+            <div class="product-dimensions__measurement">
+              {% assign label_key = 'product_dimensions.' | append: key %}
+              <dt>{{ label_key | t }}</dt>
+              <dd>{{ measurement | metafield_text | escape }}</dd>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </dl>
+      {% if block.settings.note != blank %}
+        <p class="product-dimensions__note">{{ block.settings.note | escape }}</p>
+      {% endif %}
+    {% else %}
+      <p class="product-dimensions__note">{{ 'product_dimensions.empty_editor' | t }}</p>
+    {% endif %}
+  </div>
+{% endif %}
+
+{% stylesheet %}
+  .product-dimensions {
+    width: 100%;
+    min-width: 0;
+    padding: var(--padding-xl);
+    color: var(--color-foreground);
+    background: var(--color-background);
+    border: 1px solid rgb(var(--color-foreground-rgb) / var(--opacity-10));
+    border-radius: var(--dimensions-radius);
+    overflow-wrap: anywhere;
+  }
+
+  .product-dimensions__intro {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-md);
+  }
+
+  .product-dimensions__icon {
+    width: 2rem;
+    height: 2rem;
+    flex-shrink: 0;
+  }
+
+  .product-dimensions__eyebrow {
+    margin: 0 0 var(--gap-2xs);
+    font-size: var(--font-size--xs);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .product-dimensions__heading {
+    margin: 0;
+  }
+
+  .product-dimensions__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 5rem), 1fr));
+    gap: var(--gap-lg);
+    margin: var(--margin-xl) 0 0;
+    padding-block-start: var(--padding-lg);
+    border-block-start: 1px solid rgb(var(--color-foreground-rgb) / var(--opacity-10));
+  }
+
+  .product-dimensions__measurement dt,
+  .product-dimensions__note {
+    color: var(--color-foreground-muted);
+    font-size: var(--font-size--sm);
+  }
+
+  .product-dimensions__measurement dd {
+    margin: var(--margin-2xs) 0 0;
+    font-size: var(--font-h5--size);
+    font-weight: var(--font-subheading--weight);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .product-dimensions__note {
+    margin: var(--margin-lg) 0 0;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:product_dimensions.name",
+  "tag": null,
+  "settings": [
+    { "type": "paragraph", "content": "t:product_dimensions.info" },
+    { "type": "text", "id": "heading", "label": "t:settings.heading", "default": "t:product_dimensions.heading" },
+    { "type": "textarea", "id": "note", "label": "t:product_dimensions.note" },
+    { "type": "color", "id": "background_color", "label": "t:settings.background_color", "default": "#f7f4ed" }
+  ],
+  "presets": [{ "name": "t:product_dimensions.name", "category": "t:categories.product" }]
+}
+{% endschema %}

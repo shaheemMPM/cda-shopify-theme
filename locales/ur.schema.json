@@ -8,6 +8,12 @@
  * ------------------------------------------------------------
  */
 {
+  "product_dimensions": {
+    "name": "Product dimensions",
+    "info": "Uses the product metafields custom.height, custom.width and custom.length (Dimension type). Empty measurements are hidden.",
+    "heading": "Made to fit your space",
+    "note": "Note below measurements"
+  },
   "workday": {
     "section_name": "اپنا کام کا دن بنائیں",
     "image_info": "کلیکشن کی تصویر یا اس کے پہلے پروڈکٹ کی تصویر استعمال کرنے کے لیے خالی چھوڑ دیں۔"

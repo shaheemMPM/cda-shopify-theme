@@ -8,6 +8,12 @@
  * ------------------------------------------------------------
  */
 {
+  "product_dimensions": {
+    "name": "Product dimensions",
+    "info": "Uses the product metafields custom.height, custom.width and custom.length (Dimension type). Empty measurements are hidden.",
+    "heading": "Made to fit your space",
+    "note": "Note below measurements"
+  },
   "workday": {
     "section_name": "나만의 업무 공간",
     "image_info": "비워 두면 컬렉션 이미지 또는 첫 번째 상품 이미지를 사용합니다."

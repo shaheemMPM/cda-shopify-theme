@@ -8,6 +8,12 @@
  * ------------------------------------------------------------
  */
 {
+  "product_dimensions": {
+    "name": "Product dimensions",
+    "info": "Uses the product metafields custom.height, custom.width and custom.length (Dimension type). Empty measurements are hidden.",
+    "heading": "Made to fit your space",
+    "note": "Note below measurements"
+  },
   "workday": {
     "section_name": "Skab din arbejdsdag",
     "image_info": "Lad feltet være tomt for at bruge kollektionens billede eller billedet af dens første produkt."
